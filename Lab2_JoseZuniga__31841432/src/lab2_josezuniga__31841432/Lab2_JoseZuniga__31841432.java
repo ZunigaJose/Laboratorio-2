@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Lab2_JoseZuniga__31841432 {
     static Scanner leer = new Scanner(System.in);
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         ArrayList<Universidad> lista = new ArrayList<>();
         
         int op = 15;
@@ -17,10 +17,20 @@ public class Lab2_JoseZuniga__31841432 {
             op = menu();
             switch (op) {
                 case 1:
-                    
+                    if (!ingresado) {
+                        System.out.println("\nNo ha iniciado sesion!!!!\n");
+                        break;
+                    }
+                    lista.add(crear(lista));
+                    if ((lista.get(lista.size() - 1)).getNombre().equals("Borrame")) {
+                        lista.remove(lista.size() - 1);
+                    }
                     break;
                 case 2:
-                    
+                    if (!ingresado) {
+                        System.out.println("\nNo ha iniciado sesion!!!!\n");
+                        break;
+                    }
                     break;
                 case 3:
                     System.out.print("Ingrese su nombre de usuario: ");
@@ -35,19 +45,37 @@ public class Lab2_JoseZuniga__31841432 {
                     }
                     break;
                 case 4:
-                    
+                    if (!ingresado) {
+                        System.out.println("\nNo ha iniciado sesion!!!!\n");
+                        break;
+                    }
                     break;
                 case 5:
-                    
+                    if (!ingresado) {
+                        System.out.println("\nNo ha iniciado sesion!!!!\n");
+                        break;
+                    }
+                    for (Universidad u : lista) {
+                        System.out.println(u.getNombre() + " " + u .getSucursal());
+                    }
                     break;
                 case 6:
-                    
+                    if (!ingresado) {
+                        System.out.println("\nNo ha iniciado sesion!!!!\n");
+                        break;
+                    }
                     break;
                 case 7:
-                    
+                    if (!ingresado) {
+                        System.out.println("\nNo ha iniciado sesion!!!!\n");
+                        break;
+                    }
                     break;
                 case 8:
-                    
+                    if (!ingresado) {
+                        System.out.println("\nNo ha iniciado sesion!!!!\n");
+                        break;
+                    }
                     break;
                 case 9:
                     
@@ -144,8 +172,8 @@ public class Lab2_JoseZuniga__31841432 {
             if (u.getNivel().equals("Nacional")) {
                 return true;
             }
-            return false;
         }
+        return false;
     }
     
     public static char subMenuNiveles(){

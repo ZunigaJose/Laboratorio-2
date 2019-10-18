@@ -80,6 +80,13 @@ public class Lab2_JoseZuniga__31841432 {
                         System.out.println("\nNo ha iniciado sesion!!!!\n");
                         break;
                     }
+                    pos = leer.nextInt();
+                    if (pos >= lista.size() || pos < 0) {
+                        System.out.println("\nNo va a ser posible ascender esa posicion!\n");
+                        break;
+                    }
+                    System.out.println("No me dio chance de terminar el modificar asi que reusar esto fue lo mejor que se me ocurrio :(");
+                    lista.set(pos, crear(lista));
                     break;
                 case 7:
                     if (!ingresado) {

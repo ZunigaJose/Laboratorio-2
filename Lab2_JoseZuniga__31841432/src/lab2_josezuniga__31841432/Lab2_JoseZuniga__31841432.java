@@ -11,7 +11,7 @@ public class Lab2_JoseZuniga__31841432 {
     public static void main(String[] args) throws ParseException {
         ArrayList<Universidad> lista = new ArrayList<>();
         
-        int op = 15;
+        int op = 15, pos = 0;
         boolean ingresado = false;
         while (op != 9) {
             op = menu();
@@ -31,6 +31,7 @@ public class Lab2_JoseZuniga__31841432 {
                         System.out.println("\nNo ha iniciado sesion!!!!\n");
                         break;
                     }
+                    
                     break;
                 case 3:
                     System.out.print("Ingrese su nombre de usuario: ");
@@ -49,6 +50,14 @@ public class Lab2_JoseZuniga__31841432 {
                         System.out.println("\nNo ha iniciado sesion!!!!\n");
                         break;
                     }
+                    listar(lista);
+                    System.out.print("Ingrese el pos que desea ascender: ");
+                    pos = leer.nextInt();
+                    if (pos >= lista.size() || pos < 0) {
+                        System.out.println("\nNo va a ser posible ascender esa posicion!\n");
+                        break;
+                    }
+                    lista = ascender(lista, pos);
                     break;
                 case 5:
                     if (!ingresado) {
@@ -70,6 +79,14 @@ public class Lab2_JoseZuniga__31841432 {
                         System.out.println("\nNo ha iniciado sesion!!!!\n");
                         break;
                     }
+                    listar(lista);
+                    System.out.print("Ingrese el pos que desea descender: ");
+                    pos = leer.nextInt();
+                    if (pos >= lista.size() || pos < 0) {
+                        System.out.println("\nNo va a ser posible ascender esa posicion!\n");
+                        break;
+                    }
+                    lista = descender(lista, pos);
                     break;
                 case 8:
                     if (!ingresado) {
@@ -85,7 +102,7 @@ public class Lab2_JoseZuniga__31841432 {
     }
     
     public static int menu() {
-        System.out.print("1. Crear Universidades\n"
+        System.out.print("\n\n1. Crear Universidades\n"
                 + "2. Eliminar Universidades\n"
                 + "3. Log In\n"
                 + "4. Ascender Universidad\n"
@@ -105,33 +122,35 @@ public class Lab2_JoseZuniga__31841432 {
     public static void listar(ArrayList<Universidad> list){
         for (Universidad u : list) {
             System.out.println(list.indexOf(u) + "- Nombre: " + u.getNombre() + " "
-                    + "Sucursal: " + u.getSucursal() + "Rector: " +  u.getNomRector() + " Nivel: " + u.getNivel() + 
-                    "Costo: " + u.getCosto() + "Num estudiantes: " + u.getNumEstudiantes() + "Num Maestros: " + u.getNumMaestros()
-             + "Año: " + u.getYear().getYear());
+                    + " Sucursal: " + u.getSucursal() + " Rector: " +  u.getNomRector() + " Nivel: " + u.getNivel() + 
+                    " Costo: " + u.getCosto() + "Num estudiantes: " + u.getNumEstudiantes() + " Num Maestros: " + u.getNumMaestros()
+             + " Año: " + u.getYear().getYear());
         }
     }
     
     public static ArrayList<Universidad> ascender (ArrayList<Universidad> list, int pos){
-        if (((Universidad)list.get(pos)).getNivel().equals("Publica")) {
-            list.get(pos).setNivel("Publica Prestigiosa");
-            list.get(pos).setCosto(200);
-        }
-        if (((Universidad)list.get(pos)).getNivel().equals("Privada")) {
-            list.get(pos).setNivel("Privada Prestigiosa");
-            list.get(pos).setCosto(12000);
-        }
-        if (((Universidad)list.get(pos)).getNivel().equals("Privada Prestigiosa")) {
-            System.out.println("No es posible ascender esta universidad");
-        }
-        if (((Universidad)list.get(pos)).getNivel().equals("Nacional")) {
-            System.out.println("No es posible ascender esta universidad");
-        }
-        if (((Universidad)list.get(pos)).getNivel().equals("Publica Prestigiosa")) {
+        if ((list.get(pos)).getNivel().equals("Publica Prestigiosa")) {
             if (!nacionalYa(list)) {
                 list.get(pos).setNivel("Nacional");
                 list.get(pos).setCosto(500);
             }
         }
+        if ((list.get(pos)).getNivel().equals("Publica")) {
+            list.get(pos).setNivel("Publica Prestigiosa");
+            list.get(pos).setCosto(200);
+        }
+        if ((list.get(pos)).getNivel().equals("Privada Prestigiosa")) {
+            System.out.println("No es posible ascender esta universidad");
+        }
+        if ((list.get(pos)).getNivel().equals("Privada")) {
+            list.get(pos).setNivel("Privada Prestigiosa");
+            list.get(pos).setCosto(12000);
+        }
+        
+        if ((list.get(pos)).getNivel().equals("Nacional")) {
+            System.out.println("No es posible ascender esta universidad");
+        }
+        
         return list;
     }
     
@@ -148,13 +167,13 @@ public class Lab2_JoseZuniga__31841432 {
            list.get(pos).setNivel("Privada");
            list.get(pos).setCosto(6000);
         }
-        if (((Universidad)list.get(pos)).getNivel().equals("Nacional")) {
-            list.get(pos).setNivel("Publica Prestigiosa");
-            list.get(pos).setCosto(200);
-        }
         if (((Universidad)list.get(pos)).getNivel().equals("Publica Prestigiosa")) {
                 list.get(pos).setNivel("Publica");
                 list.get(pos).setCosto(0);
+        }
+        if (((Universidad)list.get(pos)).getNivel().equals("Nacional")) {
+            list.get(pos).setNivel("Publica Prestigiosa");
+            list.get(pos).setCosto(200);
         }
         return list;
     }

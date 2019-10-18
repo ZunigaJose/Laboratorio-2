@@ -31,7 +31,14 @@ public class Lab2_JoseZuniga__31841432 {
                         System.out.println("\nNo ha iniciado sesion!!!!\n");
                         break;
                     }
-                    
+                    listar(lista);
+                    System.out.print("Ingrese el numero de la posicion que desea eliminar: ");
+                    pos = leer.nextInt();
+                    if (pos >= lista.size() || pos < 0) {
+                        System.out.println("\nNo va a ser posible eliminar esa posicion!\n");
+                        break;
+                    }
+                    lista.remove(pos);
                     break;
                 case 3:
                     System.out.print("Ingrese su nombre de usuario: ");
@@ -93,6 +100,7 @@ public class Lab2_JoseZuniga__31841432 {
                         System.out.println("\nNo ha iniciado sesion!!!!\n");
                         break;
                     }
+                    lista = random(lista);
                     break;
                 case 9:
                     
@@ -126,6 +134,16 @@ public class Lab2_JoseZuniga__31841432 {
                     " Costo: " + u.getCosto() + "Num estudiantes: " + u.getNumEstudiantes() + " Num Maestros: " + u.getNumMaestros()
              + " Año: " + u.getYear().getYear());
         }
+    }
+    
+    public static ArrayList<Universidad> random (ArrayList<Universidad> list) { 
+        int pos = (int)(0 + Math.random()* (list.size() -1));
+        if (list.get(pos).getNivel().equals("Publica Prestigiosa")) {
+            System.out.println("Se logro ascender la posicion: " + pos);
+            list.get(pos).setNivel("Nacional");
+            list.get(pos).setCosto(500);
+        }
+        return list;
     }
     
     public static ArrayList<Universidad> ascender (ArrayList<Universidad> list, int pos){

@@ -102,6 +102,27 @@ public class Lab2_JoseZuniga__31841432 {
         return op;
     }
     
+    public static ArrayList<Universidad> ascender (ArrayList<Universidad> list, int pos){
+        if (((Universidad)list.get(pos)).getNivel().equals("Publica")) {
+            list.get(pos).setNivel("Publica Prestigiosa");
+        }
+        if (((Universidad)list.get(pos)).getNivel().equals("Privada")) {
+            list.get(pos).setNivel("Privada Prestigiosa");
+        }
+        if (((Universidad)list.get(pos)).getNivel().equals("Privada Prestigiosa")) {
+            System.out.println("No es posible ascender esta universidad");
+        }
+        if (((Universidad)list.get(pos)).getNivel().equals("Nacional")) {
+            System.out.println("No es posible ascender esta universidad");
+        }
+        if (((Universidad)list.get(pos)).getNivel().equals("Publica Prestigiosa")) {
+            if (!nacionalYa(list)) {
+                list.get(pos).setNivel("Nacional");
+            }
+        }
+        return list;
+    }
+    
     public static Universidad crear(ArrayList<Universidad> list) throws ParseException{
         System.out.print("Ingrese el nombre de la institucion: ");
         String nombre = leer.nextLine();
@@ -121,15 +142,7 @@ public class Lab2_JoseZuniga__31841432 {
         System.out.print("Ingrese el numero de maestros:");
         int numMaestros = leer.nextInt();
         leer.nextLine();
-        char op = subMenuNiveles();
-        if (op == 'c') {
-            if (nacionalYa(list)) {
-                while (op == 'c') {
-                    System.out.println("Ya exixste una Universidad Nacional, vuelva a intentar: ");
-                    op = leer.nextLine().toLowerCase().charAt(0);
-                }
-            }
-        }
+        char op = subMenuNiveles1();
         int costo = 0;
         String nivel = "";
         switch (op) {
@@ -138,23 +151,21 @@ public class Lab2_JoseZuniga__31841432 {
                 nivel = "Publica";
                 break;
             case 'b':
-                costo = 200;
-                nivel = "Publica Prestigiosa";
-                break;    
-            case 'c':
-                costo = 500;
-                nivel = "Nacional";
-                break;
-            case 'd':
                 costo = 6000;
                 nivel = "Privada";
                 break;
-            case 'e':
-                costo = 12000;
-                nivel = "Privada Prestigiosa";
-                break;
         }
         return new Universidad(nombre, nomRector, sucursal, nivel, year, numMaestros, numEstudiantes, costo);
+    }
+    
+    public static char subMenuNiveles1(){
+        System.out.print("\na. Publica\n"
+                + "b. Privada: ");
+        char op = leer.nextLine().toLowerCase().charAt(0);
+        if (op < 'a' || op > 'b') {
+            return subMenuNiveles1();
+        } 
+        return op;
     }
     
     public static boolean nombreEncontrado(ArrayList<Universidad> list, String Nombre, String Sucursal){

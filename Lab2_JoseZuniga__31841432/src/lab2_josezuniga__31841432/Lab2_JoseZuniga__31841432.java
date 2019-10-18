@@ -102,12 +102,23 @@ public class Lab2_JoseZuniga__31841432 {
         return op;
     }
     
+    public static void listar(ArrayList<Universidad> list){
+        for (Universidad u : list) {
+            System.out.println(list.indexOf(u) + "- Nombre: " + u.getNombre() + " "
+                    + "Sucursal: " + u.getSucursal() + "Rector: " +  u.getNomRector() + " Nivel: " + u.getNivel() + 
+                    "Costo: " + u.getCosto() + "Num estudiantes: " + u.getNumEstudiantes() + "Num Maestros: " + u.getNumMaestros()
+             + "Año: " + u.getYear().getYear());
+        }
+    }
+    
     public static ArrayList<Universidad> ascender (ArrayList<Universidad> list, int pos){
         if (((Universidad)list.get(pos)).getNivel().equals("Publica")) {
             list.get(pos).setNivel("Publica Prestigiosa");
+            list.get(pos).setCosto(200);
         }
         if (((Universidad)list.get(pos)).getNivel().equals("Privada")) {
             list.get(pos).setNivel("Privada Prestigiosa");
+            list.get(pos).setCosto(12000);
         }
         if (((Universidad)list.get(pos)).getNivel().equals("Privada Prestigiosa")) {
             System.out.println("No es posible ascender esta universidad");
@@ -118,7 +129,32 @@ public class Lab2_JoseZuniga__31841432 {
         if (((Universidad)list.get(pos)).getNivel().equals("Publica Prestigiosa")) {
             if (!nacionalYa(list)) {
                 list.get(pos).setNivel("Nacional");
+                list.get(pos).setCosto(500);
             }
+        }
+        return list;
+    }
+    
+    public static ArrayList<Universidad> descender (ArrayList<Universidad> list, int pos){
+        if (((Universidad)list.get(pos)).getNivel().equals("Publica")) {
+            System.out.println("Universidad eliminada! :o");
+            list.remove(pos);
+        }
+        if (((Universidad)list.get(pos)).getNivel().equals("Privada")) {
+            System.out.println("Universidad eliminada! :o");
+            list.remove(pos);
+        }
+        if (((Universidad)list.get(pos)).getNivel().equals("Privada Prestigiosa")) {
+           list.get(pos).setNivel("Privada");
+           list.get(pos).setCosto(6000);
+        }
+        if (((Universidad)list.get(pos)).getNivel().equals("Nacional")) {
+            list.get(pos).setNivel("Publica Prestigiosa");
+            list.get(pos).setCosto(200);
+        }
+        if (((Universidad)list.get(pos)).getNivel().equals("Publica Prestigiosa")) {
+                list.get(pos).setNivel("Publica");
+                list.get(pos).setCosto(0);
         }
         return list;
     }
